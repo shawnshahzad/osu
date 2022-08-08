@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<h1 style="text-align: center; width: 200%; margin: 0px -50% 0px -50%; padding: 0px 0px 0px 0px; background-color: #ff7b25; border: 1px solid black;">Contact Information:</h1>
+<div style="padding-top: 50px">
+	
+</div>
+
+<table style="padding-top: 100px;">
+  <tr>
+    <th>Name</th>
+    <th>Email Address</th>
+  </tr>
+  <tr>
+    <td>Yudi Chu</td>
+    <td>@oregonstate.edu</td>
+  </tr>
+  <tr>
+    <td>Shawn Shahzad</td>
+    <td>@oregonstate.edu</td>
+  </tr>
+  <tr>
+    <td>Andrew Eppinger</td>
+    <td>eppingea@oregonstate.edu</td>
+  </tr>
+</table>
+<div style="padding-top: 50px;"></div>
+<footer style="text-align: center;font-size: 24px;">Please reach out to us any time, we'd love to hear from you!</footer>
+
+{% endblock %}

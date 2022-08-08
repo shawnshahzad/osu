@@ -1,0 +1,283 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+
+  <h1>Editing {{qname}}</h1>
+  <form action = "http://127.0.0.1:5000/test" method = "POST">
+<head>
+   
+<title>test page</title>
+<link rel="stylesheet" href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity=
+"sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<!-- sources used
+https://codepen.io/astrit/pen/OJPyqyx
+-->
+  <div class="alert alert-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Success!</strong> You have been signed in successfully!
+  </div>
+
+<style>@import "compass/css3";
+
+  body{
+    padding: 50px;
+  }</style>
+  
+<script>  window.setTimeout(function() {
+  $(".alert").fadeTo(500, 0) 
+}, 4000)
+
+</script>
+
+
+
+<script>
+$(document).ready(function () {
+  //alert("ready")
+  let rowIdx = $("#tbody").length-1;
+  // jQuery button click event to add a row
+  $('#addBtn').on('click', function () {
+    // Denotes total number of rows
+    //alert('#addBtn is clicked');
+    //alert(rowIdx);
+    // Adding a row inside the tbody.
+    $('#tbody').append(
+      `<tr name = 'containerz' id="R${++rowIdx}">
+        <td class="row-index text-center">
+          <div class='form-group'>
+    
+      
+            <div class="container" >
+
+              <label for="question">Question </label>
+              <input type="text" id="ques_${rowIdx}" name = 'R_${rowIdx}'>
+      
+              <div class='element_${rowIdx}' id='div_${rowIdx}_0'>
+                <span class='add' id='add_${rowIdx}'>Add</span>
+              </div> <!-- element -->
+
+            </div> <!-- container -->
+
+
+          </div> <!-- form-group -->
+        </td>
+        <td class="text-center">
+          <button class="btn btn-danger remove_row"
+          type="button">Remove</button>
+        </td>
+        
+      </tr>`
+    
+  );
+    
+    
+  // Add new element
+  $(".add").off('click').on('click',function(){
+    //alert("add is clicked")
+    var id = $(this).attr('id');
+    var row_idx_clicked = id.split("_")[1];
+    //alert(row_idx_clicked);
+    var lastid = $(`.element_${row_idx_clicked}:last`).attr("id");
+    var last_elemnt_cnt = lastid.split("_");
+    var nextindex = Number(last_elemnt_cnt[2]) + 1;
+    //alert(nextindex);
+    //alert(`.element_${row_idx_clicked}:last`);
+    // Adding new div container after last occurance of element class
+    $(`.element_${row_idx_clicked}:last`).after(`<div class='element_${row_idx_clicked}' id='div_${row_idx_clicked}_${nextindex}'></div>`);
+
+    // Adding element to <div>
+    $(`#div_${row_idx_clicked}_${nextindex}`).append(`<input type='text' name = 'R_${row_idx_clicked}' placeholder='answer' id='text_${row_idx_clicked}_${nextindex}'>&nbsp;<span id='remove_${row_idx_clicked}_${nextindex}' class='remove_ans'>Delete</span>`);
+      // Remove element
+    $(".remove_ans").off('click').on('click',function(){
+      //alert("remove ans clicked");
+      var id = $(this).attr('id');
+      alert(id);
+      var split_id = id.split("remove_");
+      //alert(split_id);
+      var deleteindex = split_id[1];
+      //alert(deleteindex);
+      var all_div_after = $("#div_" + deleteindex).nextAll();
+      // Remove div with id
+      $("#div_" + deleteindex).remove();
+      all_div_after.each(function(){
+        //alert($(this).attr('id'));
+        var chs=$(this).children();
+        chs.each(function(){
+          var id2alter =($(this).attr('id'));
+          var last_underscore=-1;
+          for (let ii = 0; ii < id2alter.length; ii++) {
+            if (id2alter[ii] == '_') {
+              last_underscore=ii;
+            }
+          }
+          //alert(Number(id2alter.slice(last_underscore+1))-1);
+          //alert(id2alter.slice(0,last_underscore+1));
+          $(this).attr('id', id2alter.slice(0,last_underscore+1)+(Number(id2alter.slice(last_underscore+1))-1));
+        })
+        var divid2alter =($(this).attr('id'));
+        var last_underscore_div=-1;
+        for (let ii = 0; ii < divid2alter.length; ii++) {
+          if (divid2alter[ii] == '_') {
+            last_underscore_div=ii;
+          }
+        }
+        $(this).attr('id', divid2alter.slice(0,last_underscore_div+1)+(Number(divid2alter.slice(last_underscore_div+1))-1));
+      });
+    }); //attach callback to remove ans
+  });//.add click
+
+
+
+
+// jQuery button click event to remove a row.
+$('.remove_row').off('click').on('click', function () {
+
+  // Getting all the rows next to the row
+  // containing the clicked button
+  var child = $(this).closest('tr').nextAll();
+
+  // Iterating across all the rows
+  // obtained to change the index
+  /* fix it later
+  child.each(function () {
+    // Getting <tr> id.
+    var id = $(this).attr('id');
+
+    // Getting the <p> inside the .row-index class.
+    var idx = $(this).children('.row-index').children('p');
+
+    // Gets the row number from <tr> id.
+    var dig = parseInt(id.substring(1));
+
+    // Modifying row index.
+    idx.html(`Row ${dig - 1}`);
+
+    // Modifying row id.
+    $(this).attr('id', `R${dig - 1}`);
+  });
+  */
+
+  // Removing the current row.
+  $(this).closest('tr').remove();
+
+  // Decreasing total number of rows by 1.
+
+
+}); //'#tbody').on('click', '.remove',
+
+
+});
+
+}); //document.ready end
+</script>
+
+
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
+<script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+
+</head>
+
+<body>
+  <!--Body of the quiz to be populated dynamically-->
+<div class="container pt-4">
+	<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+		<tr>
+			<th class="text-center">Quiz Question</th>
+			<th class="text-center">Remove Row</th>
+		</tr>
+		</thead>
+		<tbody id="tbody">
+
+		</tbody>
+	</table>
+	</div>
+	<button class="btn btn-md btn-primary"
+	id="addBtn" type="button">
+		Add
+	</button>
+</div>
+
+<div class='row mt-5'>
+  <div class='col-4 mx-auto'>
+      <div class='form-group'>
+        <h3>Quiz Time</h3>
+        <label for="minutes">Minutes:</label>
+        <input type="number" id="quantity" name="minutes" min="1" max="20">
+      </div>
+      
+
+      <!-- for candiate email-->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <div class="container"style="max-width: 700px;">
+
+        <div class="text-center" style="margin: 20px 0px 20px 0px;">
+           
+            <span class="text-secondary">Enter the Email addresses to send the Quiz to</span>
+        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="inputFormRow">
+                        <div class="input-group mb-3">
+                            <input type="text" name="email" class="form-control m-input" placeholder="Enter title" autocomplete="off">
+                            <div class="input-group-append">
+                                <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="newRow"></div>
+                    <button id="addRow" type="button" class="btn btn-info">Add Row</button>
+                </div>
+            </div>
+        
+    </div>
+
+    <script type="text/javascript">
+        // add row
+        $("#addRow").click(function () {
+            var html = '';
+            html += '<div id="inputFormRow">';
+            html += '<div class="input-group mb-3">';
+            html += '<input type="text" name="email" class="form-control m-input" placeholder="Enter Email" autocomplete="off">';
+            html += '<div class="input-group-append">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+            html += '</div>';
+            html += '</div>';
+
+            $('#newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#inputFormRow').remove();
+        });
+    </script>
+     
+      <br> 
+      <input type='submit' name='{{qname}}' value='Submit' class='btn btn-success'>
+    
+  </div>
+</div>
+
+</body>
+</form>
+
+</html>
+
+{% endblock %}

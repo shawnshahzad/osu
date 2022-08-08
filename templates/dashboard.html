@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<h1 style="text-align: center; margin: 0px auto;">Welcome Back!</h1>
+
+<script type="text/javascript"></script>
+<style>
+.btn-group button {
+  background-color: #04AA6D; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+.btn-group {
+  column-count: 3;
+  column-gap: 200px;
+  display: block;
+  margin-left: 210px;
+  margin-top: 100px;
+  width: 50%;
+}
+
+.space {
+  width: 40px;
+  height: auto;
+  display: inline-block;
+}
+
+.bottom_navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom_navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.bottom_navbar a:hover {
+  background: #f1f1f1;
+  color: black;
+}
+
+.bottom_navbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.bottom_nav button {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+figcaption {
+  text-align: center;
+  width: 200px;
+}
+
+</style>
+
+ <div class="btn-group">
+    <figure style="text-align: center;">
+      <input type="image" onclick="location.href='{{ url_for('quiz_name', UID=uid) }}'" src="https://cdn-icons-png.flaticon.com/512/107/107662.png" style="width:200px;height:200px;" name='new_quiz' value='New_quiz'></input>
+      <figcaption>Create New Survey</figcaption>
+    </figure>
+    <span style="width"></span>
+    <figure>
+    <input type="image" onclick="location.href='{{ url_for('existing_quizzes', UID=uid) }}'" src="https://www.nicepng.com/png/detail/34-343664_free-to-use-public-domain-tools-clip-art.png" style="width:200px;height:200px;"name='edit_quiz' value='Edit_quiz'></input>
+    <figcaption>Update Existing Survey</figcaption>    
+  </figure>
+  <figure style="text-align: center;">
+      <input type="image" onclick="location.href='{{ url_for('view_results', UID=uid) }}'" src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/33288/graph-ascending-clipart-xl.png" style="width:200px;height:200px;" name='new_quiz' value='New_quiz'></input>
+      <figcaption>View Respondant Results</figcaption>
+    </figure>
+    <figure>  
+</div> 
+
+<div class="bottom_navbar">
+  <form action="{{url_for('dashboard')}}" method='post'>
+    <a href="/about">About</a>
+    <a href="/help">Help</a>
+    <a href="/contact">Contact</a>
+  </form>
+</div>
+
+
+
+{% endblock %}

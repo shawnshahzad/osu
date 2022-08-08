@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<h1 style="text-align: center;">Send Quizzes to Candidate(s)</h1>
+<table>
+	<th>Quizzes</th>
+{% for item in range(quiz_names|length) %}
+	<tr>
+		<td>
+      <b>{{quiz_names[item]}}:</b><br>
+      <form action="/quiz4candidate" method="post" target="dummyframe">
+        <label for="Quiz{{item}}">Email(s):</label>
+        <input type="text" id="Quiz{{item}}_email" name="email" value={{emails[item]}}><br>
+        <label for="Exp">Expires (in minutes):</label>
+        <input type="text" id="Quiz{{item}}_exp" name="exp" value=30>
+        <input type="hidden" id="Quiz{{item}}_name" name="quiz_name" value="{{quiz_names[item]}}">
+        <input type="submit" value="Send">
+      </form>
+    </td>
+	</tr>
+			
+		
+
+{% endfor %}
+</table>
+
+<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+{% endblock %}

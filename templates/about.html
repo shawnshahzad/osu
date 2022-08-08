@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+
+.pictures {
+  column-count: 3;
+  column-gap: 200px;
+  display: block;
+  margin-left: 200px;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 50%;
+}
+
+.space {
+  padding: 0 15px;
+}
+
+.caption {
+	width: 200px;
+	text-align: center;
+	padding-top: 25px;
+}
+
+
+</style>
+
+
+<h1 style="text-align: center; width: 200%; margin: 0px -50% 0px -50%; padding: 0px 0px 0px 0px; background-color: #ff7b25">About Us:</h1>
+
+
+
+<h3 style="text-align:center;">This project was created by:</h3>
+<div class="pictures">
+	<figure>
+		<img src="https://msrealtors.org/wp-content/uploads/2018/11/no-user-image.gif"></img>
+		<figcaption class="caption">Yudi Chu</figcaption>
+	</figure>
+	<figure>
+		<img src="https://msrealtors.org/wp-content/uploads/2018/11/no-user-image.gif"></img>
+		<figcaption class="caption">Shawn Shahzad</figcaption>
+	</figure>
+	<figure>
+		<img src="https://msrealtors.org/wp-content/uploads/2018/11/no-user-image.gif"></img>
+		<figcaption class="caption">Andrew Eppinger</figcaption>
+	</figure>
+</div>
+
+
+
+{% endblock %}

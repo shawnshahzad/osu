@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<h1>Start by giving your quiz a name!</h1>
+
+
+<form method="POST" action="{{ url_for('quiz_name', UID=uid) }}">
+  <label for="quiz_name">Name of Quiz:</label><br>
+  <input type="text" name="quiz_name"><br><br>
+  <input type="submit" name="submit_button" value="Submit">
+</form>
+
+
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<h1 style="text-align: center; width: 200%; margin: 0px -50% 0px -50%; padding: 0px 0px 0px 0px; background-color: #ff7b25; border: 1px solid black;">FAQ</h1>
+</html>
+
+<style type="text/css">
+	table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<div style="padding-top: 50px">
+	
+</div>
+
+<table style="padding-top: 100px;">
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+  </tr>
+  <tr>
+    <td>Can I update a quiz that I've already sent out?</td>
+    <td>Yes, there is an option to edit any quizzes you've already made and can send them out again.</td>
+  </tr>
+  <tr>
+    <td>How can I recover my username or password?</td>
+    <td>You can recover your username here(link) or password here(link)</td>
+  </tr>
+  <tr>
+    <td>Is there a limit on the amount of quizzes I can make?</td>
+    <td>No, you can make as many as you would like, for free!</td>
+  </tr>
+  <tr>
+    <td>Is there a paid version of this quiz maker?</td>
+    <td>All features of the quiz maker are free.</td>
+  </tr>
+  <tr>
+    <td>How many people can I send a quiz to?</td>
+    <td>As many as you would like.</td>
+  </tr>
+</table>
+<div style="padding-top: 50px;"></div>
+<footer style="text-align: center;font-size: 24px;">See the Contacts page if you have any additional questions not answered here!</footer>
+
+
+{% endblock %}

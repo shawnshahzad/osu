@@ -1,0 +1,192 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>test page</title>
+<link rel="stylesheet" href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity=
+"sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+
+
+
+<script>
+	
+
+  $(document).ready(function () {
+
+// Denotes total number of rows
+var rowIdx = 0;
+
+// jQuery button click event to add a row
+$('#addBtn').on('click', function () {
+
+  // Adding a row inside the tbody.
+  $('#tbody').append(`<tr id="R${++rowIdx}">
+    <td class="row-index text-center">
+    <div class='form-group'>
+ <!-- <label>Question</label>
+  <input type='question' name='question' required class='form-control'> -->
+  
+  <div class="container" >
+  
+  <label for="fname">Question </label>
+  <input type="text" id="fname" name="fname">
+  
+  
+  <form action="myservlet.do" method="POST">
+  <select name="myselect" id="myselect">
+      <option value=1>One</option>
+      <option value=2>Two</option>
+      <option value=3>Three</option>
+      <option value=4>Four</option>
+  </select>
+</form>
+  
+  
+  
+  
+ <div class='element' id='div_1'>
+  <input type='text' placeholder='anwser' id='txt_1' >&nbsp;<span class='add'>Add</span>
+ </div> <!-- element -->
+</div> <!-- container -->
+
+
+</div> <!-- form-group -->
+    </td>
+    <td class="text-center">
+      <button class="btn btn-danger remove"
+      type="button">Remove</button>
+      </td>
+    </tr>`
+    
+    
+    
+    
+    
+    
+    
+    );
+    
+      $(document).ready(function(){
+
+// Add new element
+$(".add").click(function(){
+
+// Finding total number of elements added
+var total_element = $(".element").length;
+
+// last <div> with element class id
+var lastid = $(".element:last").attr("id");
+var split_id = lastid.split("_");
+var nextindex = Number(split_id[1]) + 1;
+
+var max = $("#myselect").val();
+// Check total number elements
+if(total_element < max ){
+// Adding new div container after last occurance of element class
+$(".element:last").after("<div class='element' id='div_"+ nextindex +"'></div>");
+
+// Adding element to <div>
+$("#div_" + nextindex).append("<input type='text' placeholder='Enter your skill' id='txt_"+ nextindex +"'>&nbsp;<span id='remove_" + nextindex + "' class='remove'>Delete</span>");
+
+}
+
+});
+
+// Remove element
+$('.container').on('click','.remove',function(){
+
+var id = this.id;
+var split_id = id.split("_");
+var deleteindex = split_id[1];
+
+// Remove <div> with id
+$("#div_" + deleteindex).remove();
+
+}); 
+});
+    
+       
+});
+
+// jQuery button click event to remove a row.
+$('#tbody').on('click', '.remove', function () {
+
+  // Getting all the rows next to the row
+  // containing the clicked button
+  var child = $(this).closest('tr').nextAll();
+
+  // Iterating across all the rows
+  // obtained to change the index
+  child.each(function () {
+
+  // Getting <tr> id.
+  var id = $(this).attr('id');
+
+  // Getting the <p> inside the .row-index class.
+  var idx = $(this).children('.row-index').children('p');
+
+  // Gets the row number from <tr> id.
+  var dig = parseInt(id.substring(1));
+
+  // Modifying row index.
+  idx.html(`Row ${dig - 1}`);
+
+  // Modifying row id.
+  $(this).attr('id', `R${dig - 1}`);
+  });
+
+  // Removing the current row.
+  $(this).closest('tr').remove();
+
+  // Decreasing total number of rows by 1.
+  rowIdx--;
+});
+});
+</script>
+
+
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
+<script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+
+
+
+
+</head>
+
+<body>
+<div class="container pt-4">
+	<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+		<tr>
+			<th class="text-center">Quiz Question</th>
+			<th class="text-center">Remove Row</th>
+		</tr>
+		</thead>
+		<tbody id="tbody">
+
+		</tbody>
+	</table>
+	</div>
+	<button class="btn btn-md btn-primary"
+	id="addBtn" type="button">
+		Add
+	</button>
+</div>
+</body>
+
+</html>
+
+{% endblock %}
